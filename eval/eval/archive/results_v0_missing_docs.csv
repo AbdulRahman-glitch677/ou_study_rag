@@ -1,0 +1,294 @@
+﻿id,type,subject,question,answer,sources,top_distance,latency_s,looks_like_refusal
+1,normal,gen_ai,"What is Generative AI, and how does it differ from discriminative modelling?","**Generative AI** is a class of machine‑learning frameworks that learn to produce new data that has the same statistical properties as a training set.  In the context of the document, a generative adversarial network (GAN) is described as a prominent framework for generative AI: the generator network samples from a latent space and synthesises data that “look[s] at least superficially authentic to human observers” (genai_gan.pdf p1).
+
+**Discriminative modelling** is the complementary part of a GAN: the discriminator network is trained to tell whether an input comes from the real data distribution or from the generator.  The discriminator’s objective is to output a value close to 1 for real samples and close to 0 for synthetic ones, while the generator’s objective is to minimise the same loss so that its outputs become indistinguishable from real data (genai_gan.pdf p2).
+
+Thus, generative AI focuses on *creating* data that mimics the training distribution, whereas discriminative modelling focuses on *distinguishing* between real and generated (or between classes).",genai_gan.pdf p1; genai_gan.pdf p2; genai_gan.pdf p1; genai_gan.pdf p2,0.362,1.6,False
+2,normal,gen_ai,What are the main types of generative models listed in the syllabus?,The syllabus lists the **main types of deep generative models that perform maximum likelihood estimation** (see the heading on page 2 of *genai_gan.pdf*).,genai_gan.pdf p26; genai_gan.pdf p24; genai_gan.pdf p2; genai_gan.pdf p2,0.514,1.06,False
+3,normal,gen_ai,What is the role of attention mechanisms in transformer architecture?,"**Role of attention mechanisms in transformer architecture**
+
+The attention mechanism is the core component that lets a transformer learn *which* tokens in a sequence should influence each other.  
+* It computes a relevance score between every pair of tokens using the query‑key dot‑product (the matrices \(Q\) and \(K\)).  
+* These scores are turned into a weighted sum of the value vectors \(V\), producing a context‑aware representation for each token.  
+* The resulting attended vectors are then passed through the output projection and onward to the next layer, ultimately shaping the logits that the model outputs.  
+* Because each attention head can focus on different relationships (e.g., next‑word, verb‑object, long‑range dependencies), the mechanism allows the model to capture both short‑ and long‑range patterns as depth increases.
+
+> *Source: “genai_transformer.pdf”, page 9.*",genai_transformer.pdf p15; genai_transformer.pdf p9; genai_transformer.pdf p18; genai_transformer.pdf p15,0.313,1.28,False
+4,normal,gen_ai,What is Retrieval-Augmented Generation (RAG)?,"Retrieval‑Augmented Generation (RAG) is a technique that enhances large language models (LLMs) by adding an information‑retrieval component. This allows the model to pull in external documents or up‑to‑date data at generation time, so that its responses are grounded in fresh, relevant information rather than only its original training knowledge. In other words, RAG combines user input with retrieved documents in the prompt, encouraging the LLM to prioritize the supplied data over its pre‑existing knowledge.  
+
+*Source: genai_rag.pdf, page 2*",genai_rag.pdf p2; genai_rag.pdf p2; genai_rag.pdf p6; genai_rag.pdf p3,0.283,0.87,False
+5,normal,gen_ai,What is a Generative Adversarial Network (GAN)?,"A Generative Adversarial Network (GAN) is a machine‑learning framework in which two neural networks—**a generator** and **a discriminator**—compete against each other in a zero‑sum game. The generator learns to produce data that mimic a training set, while the discriminator learns to distinguish real data from the generator’s outputs. The generator is trained not to match a specific target image but to “fool” the discriminator, enabling the model to learn generative patterns in an unsupervised (or semi‑/fully supervised) manner.  
+
+*Source: genai_gan.pdf, page 1*",genai_gan.pdf p1; genai_gan.pdf p1; genai_gan.pdf p3; genai_gan.pdf p1,0.182,0.97,False
+6,normal,gen_ai,What is MuseGAN used for?,"I’m sorry, but the provided context does not contain any information about MuseGAN, so I can’t answer that question based on the given material.",genai_transformer.pdf p19; genai_gan.pdf p17; genai_gan.pdf p21; genai_transformer.pdf p27,0.554,0.87,True
+7,normal,gen_ai,Explain the adversarial training process between the generator and discriminator in a GAN.,"**Adversarial training in a GAN**
+
+In a Generative Adversarial Network the two neural networks – the **generator** \(G\) and the **discriminator** \(D\) – are trained simultaneously as opponents in a minimax game.  
+1. **Generator’s role** – \(G\) takes a random latent vector \(z\) (sampled from a simple distribution such as a multivariate normal) and produces a synthetic sample \(G(z)\).  
+2. **Discriminator’s role** – \(D\) receives either a real data point \(x\) from the training set or a fake sample \(G(z)\) and outputs a probability that the input is real.  
+3. **Objective** – The two networks are updated by back‑propagation according to the GAN loss (the non‑saturating form is often used for faster convergence). The discriminator is trained to maximize the probability of correctly classifying real vs. fake samples, while the generator is trained to minimize this probability, i.e., to “fool” the discriminator.  
+4. **Iterative process** – In each training step a batch of real samples and a batch of generated samples are fed to \(D\). The discriminator’s parameters are updated first, then the generator’s parameters are updated using the gradient that flows through \(D\). This alternating update continues until the generator produces samples that the discriminator cannot distinguish from real data, reaching a Nash equilibrium of the game.
+
+> *Source: “Generative adversarial network” PDF – pages 2, 3, 8, and 11.*",genai_gan.pdf p3; genai_gan.pdf p8; genai_gan.pdf p2; genai_gan.pdf p11,0.305,1.38,True
+8,normal,gen_ai,How does prompt engineering help improve the output of a language model?,"Prompt engineering improves a language model’s output by carefully structuring the prompt so that the model receives the most relevant information first and is guided to use that information rather than relying solely on its pre‑trained knowledge. In a Retrieval‑Augmented Generation (RAG) setting, the prompt is built to include external documents or key facts early on, which encourages the LLM to prioritize the supplied data during generation. This leads to more accurate, context‑aware, and tailored responses.  
+
+**Source:** *genai_rag.pdf*, page 2.",genai_transformer.pdf p4; genai_rag.pdf p2; genai_transformer.pdf p4; genai_rag.pdf p2,0.512,2.3,False
+9,normal,gen_ai,Explain how Stable Diffusion models are used for image generation.,"Stable Diffusion models are a type of **latent diffusion model** that generate images by working in a compressed latent space rather than directly in pixel space.  
+1. **Encoding** – An input image (or a random noise vector) is first encoded into a lower‑dimensional latent representation.  
+2. **Diffusion process** – In this latent space a diffusion process is applied: noise is gradually added (the forward process) and then progressively removed (the backward process) using a neural network that predicts the denoising step.  
+3. **Decoding** – The final denoised latent is decoded back into pixel space, yielding a high‑quality image.  
+
+Stable Diffusion 3 (released March 2024) updated the architecture of the latent diffusion model: instead of the traditional UNet backbone it now uses a Transformer‑based Diffusion Transformer (DiT) and incorporates **rectified flow** to improve sampling efficiency. This change allows the model to generate images more quickly and with higher fidelity while still operating in the latent space.
+
+These steps together enable Stable Diffusion models to produce realistic images from random noise or from conditioned prompts, making them a popular choice for image generation tasks.
+
+*Source: genai_diffusion.pdf, page 20.*",genai_diffusion.pdf p15; genai_diffusion.pdf p1; genai_diffusion.pdf p20; genai_diffusion.pdf p25,0.273,8.55,False
+10,normal,gen_ai,"What is a hallucination in a large language model, and why is it a challenge?","A **hallucination** in a large language model (LLM) is when the model generates text that is not grounded in the input data or any reliable source—essentially fabricating facts or details that the model has no basis for.  
+
+This is a challenge because:
+
+1. **Unreliable outputs** – The model can produce statements that appear plausible but are actually false, which can mislead users or spread misinformation.  
+2. **Self‑uncertainty** – LLMs often lack the ability to recognize when they do not have enough information to answer accurately, so they may still produce an answer instead of indicating uncertainty.  
+3. **Limited mitigation by RAG** – Retrieval‑augmented generation (RAG) can reduce hallucinations but does not eliminate them; the model can still hallucinate around the retrieved source material or pull in factually correct but misleading sources.  
+
+These issues undermine trust in LLMs and make it difficult to deploy them safely in real‑world applications.  
+
+*Source: genai_rag.pdf, page 5.*",genai_rag.pdf p5; genai_transformer.pdf p22; genai_transformer.pdf p24; genai_transformer.pdf p24,0.487,12.2,True
+11,normal,gen_ai,Compare GANs and Variational Autoencoders (VAEs) in terms of their modelling approach and generation process.,"**Modelling approach**
+
+- **GANs** – The core idea is an *adversarial* game between two neural networks: a **generator** that tries to produce realistic samples and a **discriminator** that tries to distinguish real from fake data.  The generator is trained to fool the discriminator, not to minimise a distance to a particular image.  This indirect training is described on page 11 of *genai_gan.pdf*【genai_gan.pdf p11】.  
+- **VAEs** – In the context of the paper, a VAE is used as the generator in a VAE‑GAN (VAEGAN) architecture【genai_gan.pdf p11】.  The VAE itself is a probabilistic latent‑variable model that learns an encoder‑decoder pair and is proven to be a universal approximator【genai_gan.pdf p2】.
+
+**Generation process**
+
+- **GANs** – Once trained, the generator can produce a *complete* sample in a single forward pass through the network.  This is highlighted in the discussion of GANs’ ability to generate one sample in one pass, unlike autoregressive models that require multiple passes【genai_gan.pdf p2】.  
+- **VAEs** – Generation in a VAE (and thus in VAEGAN) proceeds by first sampling a latent vector from the learned prior distribution and then decoding it through the decoder network to obtain a sample.  The VAEGAN description implies that the VAE generator follows this latent‑to‑data pipeline【genai_gan.pdf p11】.
+
+**Summary**
+
+- GANs rely on an adversarial objective and produce samples directly in one pass.  
+- VAEs (as used in VAEGAN) rely on a probabilistic latent‑variable model, sampling a latent code and decoding it to generate data.  Both approaches are universal approximators, but they differ fundamentally in training objective and the way a new sample is produced.",genai_gan.pdf p11; genai_gan.pdf p2; genai_gan.pdf p1; genai_gan.pdf p11,0.291,7.67,False
+12,normal,gen_ai,Explain how CycleGAN can be used for painting generation and how neural style transfer differs from this approach.,"The provided context does not contain any information about CycleGAN or its use for painting generation.  
+It does, however, mention neural style transfer in the discussion of StyleGAN‑1:
+
+* “Each style block applies a *style latent vector* via affine transform (*adaptive instance normalization*), similar to how neural style transfer uses Gramian matrix.”  
+  – **Source:** *genai_gan.pdf*, page 18.  
+
+Because the context does not describe CycleGAN, I cannot explain how CycleGAN would be used for painting generation or contrast it with neural style transfer.",genai_gan.pdf p18; genai_gan.pdf p18; genai_gan.pdf p19; genai_gan.pdf p19,0.307,14.17,True
+13,normal,cyber_security,What is Zero Trust Architecture (ZTA)?,"Zero Trust Architecture (ZTA) is a design and implementation strategy for IT systems that operates on the premise that no user or device should be trusted by default—even if they are on a privileged network or have been previously verified. It requires continuous identity verification, device compliance checks, and least‑privilege access to explicitly‑authorized resources, effectively removing the notion of a trusted perimeter.  
+
+**Source:** *cyber_zero_trust.pdf* – pages 1 and 2.",cyber_zero_trust.pdf p1; cyber_zero_trust.pdf p2; cyber_zero_trust.pdf p2; cyber_zero_trust.pdf p1,0.17,1.99,False
+14,normal,cyber_security,What is the difference between symmetric encryption and public-key encryption?,"Symmetric encryption and public‑key (asymmetric) encryption differ mainly in how the keys that protect the data are handled:
+
+| Feature | Symmetric encryption | Public‑key encryption |
+|---------|----------------------|-----------------------|
+| **Key usage** | One secret key is used for both encryption and decryption. | A key pair is used: a public key encrypts data, a private key decrypts it. |
+| **Key distribution** | The same key must be shared securely between the communicating parties before any data can be exchanged. | The public key can be distributed openly; only the private key must remain secret. |
+| **Typical role in TLS** | After the TLS handshake, a symmetric‑key algorithm encrypts all subsequent data (providing confidentiality). The key is generated uniquely for each connection from a shared secret negotiated at the start of the session. (cyber_tls.pdf p1) | The handshake uses public‑key methods (e.g., RSA, Diffie–Hellman, ECDHE) to exchange or agree on that shared secret. These methods rely on a public‑private key pair. (cyber_tls.pdf p5) |
+
+In short, symmetric encryption uses a single shared key for both sides, while public‑key encryption uses a pair of mathematically related keys—one public, one private—allowing secure key exchange and authentication before symmetric encryption takes over.",cyber_tls.pdf p1; cyber_tls.pdf p19; cyber_tls.pdf p5; cyber_tls.pdf p1,0.577,10.5,False
+15,normal,cyber_security,"What are phishing, smishing, and vishing?",I don't know.,cyber_sql_injection.pdf p8; cyber_tls.pdf p26; cyber_tls.pdf p11; cyber_tls.pdf p10,0.577,9.67,False
+16,normal,cyber_security,"What is a botnet, and what role can it play in cyberattacks?",The only mention of a botnet in the supplied material is the reference to the **TDSS botnet: full disclosure** (see the citation in *cyber_sql_injection.pdf* on page 10).  That reference indicates that a botnet is a network of compromised machines that can be leveraged in cyberattacks.  No further definition or description of its role is provided in the context.,cyber_buffer_overflow.pdf p8; cyber_buffer_overflow.pdf p9; cyber_sql_injection.pdf p10; cyber_buffer_overflow.pdf p12,0.56,6.4,False
+17,normal,cyber_security,What is SQL injection?,"SQL injection is a code‑injection technique used to attack data‑driven applications. It works by inserting malicious SQL statements into an input field so that they are executed by the database (for example, to dump the database contents to the attacker). The attack exploits a vulnerability in the application’s handling of user input—such as improper filtering of string literals or lack of strong typing—allowing the injected SQL to be executed.  
+
+*Source: cyber_sql_injection.pdf, page 1*",cyber_sql_injection.pdf p1; cyber_sql_injection.pdf p13; cyber_sql_injection.pdf p9; cyber_sql_injection.pdf p5,0.173,8.95,False
+18,normal,cyber_security,What is the purpose of a digital certificate?,"A digital certificate is used to **prove that a particular public key belongs to a named entity and to specify how that key may be used**.  By certifying ownership and expected usage, it lets relying parties trust signatures or assertions made with the corresponding private key.  
+
+*Source: cyber_tls.pdf, page 4*",cyber_tls.pdf p4; cyber_tls.pdf p4; cyber_tls.pdf p19; cyber_tls.pdf p1,0.476,4.66,False
+19,normal,cyber_security,How do firewalls help protect computer networks?,The provided context does not contain any information about how firewalls help protect computer networks.,cyber_ipsec.pdf p1; cyber_tls.pdf p11; cyber_tls.pdf p2; cyber_zero_trust.pdf p1,0.58,4.86,False
+20,normal,cyber_security,Explain how a stack-based buffer overflow vulnerability occurs.,"A stack‑based buffer overflow happens when a program writes more data into a buffer that is located on the call stack than the buffer was allocated to hold. Because the stack is a contiguous region of memory, the excess bytes spill over into the adjacent stack slots—often the saved frame pointer, local variables of the caller, or the return address that the function will use when it finishes.  
+
+The typical scenario is:
+
+1. **Assumption of size** – The program creates a buffer of a fixed size and assumes that all input will fit within that size.  
+2. **Malicious input** – An attacker supplies input that is larger than the buffer.  
+3. **Overflow** – The write operation (e.g., `strcpy`, `sprintf`, or a raw memory copy) does not check bounds and continues writing past the end of the buffer.  
+4. **Corruption of stack data** – The overflow overwrites adjacent stack memory. If the overwritten data includes the function’s return address, the program will jump to an attacker‑chosen location when the function returns, allowing arbitrary code execution.  
+
+This mechanism is described in the PDF as follows:  
+- The definition of a buffer overflow and its effect on adjacent memory is given on **page 1** (“Data is written into A, but is too large to fit within A, so it overflows into B.”).  
+- The exploitation process—crafting data to overwrite the return address and redirect execution—is explained on **page 3** (“The attacker designs data to cause one of these exploits… compute the location of their shellcode relative to that pointer”).  
+- The practical impact of such an overflow, especially on Windows where the return address must end with a null byte, is noted on **page 5** (“This method also allows shellcode to be placed after the overwritten return address… limits the size of the shellcode to the size of the buffer”).  
+
+Thus, a stack‑based buffer overflow occurs when unchecked input writes beyond a buffer’s bounds on the stack, corrupting critical control data such as the return address and enabling an attacker to hijack program execution.  
+
+*Source: cyber_buffer_overflow.pdf – pages 1, 3, 5.*",cyber_buffer_overflow.pdf p7; cyber_buffer_overflow.pdf p3; cyber_buffer_overflow.pdf p1; cyber_buffer_overflow.pdf p5,0.268,6.39,False
+21,normal,cyber_security,What are the purposes of the Authentication Header (AH) and Encapsulating Security Payload (ESP) in IPsec?,"**Authentication Header (AH)**  
+- Provides **connectionless data integrity** and **data‑origin authentication** for IP datagrams.  
+- Protects against **IP header modification attacks** and **replay attacks** (by optionally using a sequence number and sliding‑window technique).  
+- Source: *cyber_ipsec.pdf*, page 1.  
+
+**Encapsulating Security Payload (ESP)**  
+- Provides **confidentiality** (encryption of the payload).  
+- Also supplies **connectionless data integrity**, **data‑origin authentication**, and an **anti‑replay** service (partial sequence integrity).  
+- Offers limited **traffic‑flow confidentiality** (hides the size of the payload).  
+- Source: *cyber_ipsec.pdf*, pages 1–2.",cyber_ipsec.pdf p1; cyber_ipsec.pdf p1; cyber_ipsec.pdf p1; cyber_ipsec.pdf p2,0.207,8.86,False
+22,normal,cyber_security,Explain the role of memory forensics in investigating malicious activity.,"I’m sorry, but the provided context does not contain any information about memory forensics, so I can’t answer that question based on the given material.",cyber_buffer_overflow.pdf p1; cyber_buffer_overflow.pdf p8; cyber_buffer_overflow.pdf p8; cyber_buffer_overflow.pdf p3,0.497,6.7,True
+23,normal,cyber_security,Compare SSL/TLS and IPsec in terms of the security they provide and the communication they protect.,"**Security provided**
+
+| Feature | IPsec (cyber_ipsec.pdf p1) | TLS/SSL (cyber_tls.pdf p8) |
+|---------|---------------------------|---------------------------|
+| **Encryption** | Encrypts IP datagrams (ESP) and can also provide integrity/authentication (AH). | Encrypts the transport‑layer stream (TLS record layer). |
+| **Authentication** | Mutual authentication of agents at session start and key negotiation (e.g., IKE). | Uses public‑key certificates to verify endpoint identities; can also provide client authentication. |
+| **Integrity** | AH gives connectionless data‑integrity and origin authentication; ESP also provides integrity. | TLS record layer includes MACs for integrity. |
+| **Layer of operation** | Internet layer (Layer 3 of OSI). | Transport layer (Layer 4) and above (application‑level protocols). |
+
+**Communication protected**
+
+| Layer / Protocol | IPsec | TLS/SSL |
+|------------------|-------|---------|
+| **Host‑to‑host** | Protects end‑to‑end traffic between two hosts (host‑to‑host). | Can protect application traffic (e.g., SMTP, SIP) between two endpoints. |
+| **Network‑to‑network** | Protects traffic between security gateways (network‑to‑network). | Can tunnel an entire network stack (OpenVPN, OpenConnect) to create a VPN. |
+| **Application protocols** | Not specific to any application; automatically secures all IP traffic. | Explicitly designed to secure application protocols such as SMTP, SIP, and any TLS‑enabled service. |
+| **Firewall/NAT traversal** | Requires special configuration; less NAT‑friendly. | Inherently more firewall/NAT‑friendly, making it easier to administer for large remote‑access populations. |
+
+**Summary**
+
+IPsec secures IP packets at the network layer, providing authentication, encryption, and integrity for all traffic between hosts or gateways. TLS/SSL secures the transport layer and is typically used to protect specific application protocols (SMTP, SIP, etc.) or to tunnel an entire network stack for VPNs; it also offers better NAT/firewall traversal. Thus, IPsec is a lower‑level, all‑traffic protection mechanism, while TLS/SSL is a higher‑level, application‑oriented security layer.",cyber_ipsec.pdf p1; cyber_tls.pdf p8; cyber_tls.pdf p8; cyber_ipsec.pdf p1,0.387,7.11,False
+24,normal,cyber_security,"Explain how honeypots, intrusion detection systems (IDS), and SIEM systems can complement one another in detecting and analysing security incidents.","**Complementary roles of honeypots, IDS, and SIEM**
+
+| Component | What it does | How it complements the others | Source |
+|-----------|--------------|------------------------------|--------|
+| **Intrusion Detection System (IDS)** | Scans network traffic for known attack signatures and behavioural heuristics. In the context of buffer‑overflow attacks, the IDS can use *deep packet inspection (DPI)* to spot characteristic patterns such as a NOP‑sled or shellcode (cyber_buffer_overflow.pdf p8). | Provides the first line of detection by flagging suspicious packets in real time. The alerts it generates can be forwarded to a SIEM for correlation and to a honeypot for deeper investigation. | cyber_buffer_overflow.pdf p8 |
+| **Honeypot** | A deliberately vulnerable system that attracts attackers, allowing security teams to observe attack techniques, payloads, and attacker behaviour in a controlled environment. | Supplies rich, contextual data that an IDS alone cannot capture (e.g., the exact exploit code, post‑exploitation actions). The data collected by the honeypot can be fed into a SIEM to enrich event logs and improve correlation accuracy. | *Not directly referenced in the provided context* |
+| **Security Information and Event Management (SIEM)** | Aggregates logs and alerts from multiple sources (IDS, honeypots, firewalls, servers, etc.), normalises them, and applies correlation rules to identify complex attack patterns and incident timelines. | Acts as the central hub that stitches together the real‑time alerts from the IDS and the detailed forensic data from the honeypot, enabling analysts to see the full picture of an incident and to respond more effectively. | *Not directly referenced in the provided context* |
+
+**How they work together**
+
+1. **Detection** – The IDS (using DPI as shown in cyber_buffer_overflow.pdf p8) flags anomalous traffic that matches known buffer‑overflow signatures.  
+2. **Enrichment** – The honeypot, which is not mentioned in the supplied excerpts but is a common security practice, captures the attacker’s payload and post‑exploitation steps, providing context that the IDS alone cannot see.  
+3. **Correlation & Analysis** – The SIEM (also not cited in the excerpts) ingests alerts from the IDS and logs from the honeypot, correlates them across the network, and produces a comprehensive incident report that can guide response actions.
+
+In short, the IDS offers real‑time detection, the honeypot supplies detailed attack artefacts, and the SIEM stitches these pieces together to give analysts a complete, actionable view of security incidents.",cyber_ipsec.pdf p1; cyber_sql_injection.pdf p10; cyber_buffer_overflow.pdf p8; cyber_sql_injection.pdf p11,0.574,14.9,True
+25,normal,green_building,"What is a green building, and what are its typical features?","The excerpts from **green_building.pdf** that were provided do not contain a direct definition of a green building or a list of its typical features.  
+- The definition is referenced via the Wikipedia link that appears on **page 15** of the PDF.  
+- Typical features are mentioned in the EPA reference “Components of Green Building,” which is cited on **page 17** of the PDF.  
+
+Because the actual text of those sources is not included in the supplied context, the PDF itself does not provide the definition or the feature list in the excerpts shown.",green_building.pdf p15; green_building.pdf p21; green_building.pdf p17; green_building.pdf p18,0.202,17.15,True
+26,normal,green_building,"What are GRIHA, IGBC, and LEED?","**GRIHA** – a green‑building rating system developed by the Energy and Resources Institute (ERI) in India.  
+**IGBC** – the Indian Green Building Council, the organization that administers the GRIHA rating.  
+**LEED** – a green‑building rating system created by the U.S. Green Building Council (USGBC) that evaluates indoor environmental quality, energy use, water efficiency, materials, and more.  
+
+*Sources: green_griha.pdf p1 (Wikipedia reference to GRIHA and IGBC) and green_building.pdf p8 (description of LEED and its relationship to USGBC).*",green_griha.pdf p1; green_building.pdf p8; green_building.pdf p8; green_building.pdf p8,0.596,12.13,False
+27,normal,green_building,What is rainwater harvesting?,"Rainwater harvesting (RWH) is the practice of collecting rainwater that falls on roofs or other surfaces and redirecting it—typically through gutters and downspouts—to a storage facility such as a tank, cistern, deep pit, aquifer, or reservoir. The stored water can then be used for various purposes, and the system may include components such as pre‑filters, pumps, and treatment devices to ensure water quality.  
+
+*Source: green_rainwater.pdf, page 1*",green_rainwater.pdf p13; green_rainwater.pdf p11; green_rainwater.pdf p1; green_rainwater.pdf p3,0.202,0.66,False
+28,normal,green_building,Define embodied energy and operational energy in buildings.,"**Embodied energy**  
+Embodied energy is the total amount of energy that is required to produce a product or service, “as if that energy were incorporated or ‘embodied’ in the product itself.” It includes all direct and indirect energy used in extracting raw materials, processing them, assembling components, transporting, constructing, maintaining, repairing, de‑constructing, and disposing of the item.  
+*Source: green_embodied_energy.pdf, page 1.*
+
+**Operational energy**  
+Operational energy refers to the energy that a building consumes while it is in use – for example, the electricity or fuel needed for heating, cooling, lighting, and other day‑to‑day operations. This is the energy that is emitted during the building’s operational phase, in contrast to the embodied energy that was expended during its construction and life‑cycle.  
+*Source: green_embodied_energy.pdf, page 6 (context of “operational emissions”).*",green_embodied_energy.pdf p1; green_embodied_energy.pdf p9; green_embodied_energy.pdf p1; green_embodied_energy.pdf p6,0.274,12.28,False
+29,normal,green_building,Name four sustainable building materials mentioned in the syllabus.,"The syllabus lists the following sustainable building materials (green building materials) on **green_building.pdf, page 7**:
+
+1. **Lumber** – certified to a third‑party standard  
+2. **Bamboo** – a rapidly renewable plant material  
+3. **Straw** – another rapidly renewable plant material  
+4. **Dimension stone** – a natural, locally available material  
+
+These materials are highlighted as examples of “green” building materials in the syllabus.",green_building.pdf p2; green_building.pdf p15; green_building.pdf p7; green_building.pdf p18,0.372,9.62,False
+30,normal,green_building,How does proper building orientation improve comfort and energy efficiency?,"Proper building orientation—often called passive‑solar design—places the building’s longest sides and the largest windows on the south (or appropriate) side so that the structure receives the most direct sunlight during the winter while being shaded during the summer. This strategy:
+
+* **Maximises solar gain in winter** – the south‑facing windows and walls absorb heat from the sun, reducing the need for mechanical heating.  
+* **Provides summer shading** – awnings, porches, trees, and the building’s own geometry block high‑angle summer sun, keeping interior spaces cooler and lowering cooling loads.  
+* **Improves daylighting** – well‑placed windows let natural light penetrate deep into the interior, cutting the need for electric lighting during daylight hours.  
+
+Together, these effects lower operating energy consumption, enhance occupant comfort, and contribute to a more energy‑efficient building.  
+
+**Source:** *green_building.pdf*, page 5.",green_building.pdf p5; green_building.pdf p5; green_building.pdf p5; green_building.pdf p18,0.389,11.02,False
+31,normal,green_building,"Explain how water-efficient plumbing, wastewater treatment, and reuse systems conserve water.","Water‑efficient plumbing, wastewater treatment, and reuse systems conserve water by reducing the amount of potable water that must be supplied and by turning otherwise wasted water into useful resources.
+
+* **Water‑efficient plumbing**  
+  * Dual‑plumbing systems recycle greywater for toilet flushing or car washing, so the same water is used twice.  
+  * Ultra‑low‑flush toilets and low‑flow shower heads cut the volume of water used per flush or shower.  
+  * Bidets eliminate the need for toilet paper, further reducing the amount of water that must be flushed away.  
+  * Point‑of‑use water treatment and heating improve water quality and energy efficiency while keeping the water in circulation longer.  
+  (green_building.pdf, p6)
+
+* **Waste‑water treatment and reuse**  
+  * Greywater from dishwashers, washing machines, and other domestic sources can be treated on‑site and reused for non‑potable purposes such as toilet flushing, car washing, and subsurface irrigation.  
+  * Rainwater collectors provide an independent supply for toilet flushing and gardening, reducing reliance on treated municipal water or groundwater.  
+  * Treating greywater and rainwater for non‑potable use lowers the overall demand on local aquifers and municipal treatment plants.  
+  (green_building.pdf, p9; green_rainwater.pdf, p5)
+
+By combining low‑flow fixtures, dual plumbing, and on‑site treatment of greywater and rainwater, buildings can significantly cut potable water use, lessen the load on wastewater treatment facilities, and make the most of every drop of water that is collected.",green_building.pdf p6; green_building.pdf p9; green_rainwater.pdf p5; green_rainwater.pdf p13,0.3,8.42,False
+32,normal,green_building,"How can efficient lighting, appliances, and renewable energy reduce a building's operational energy consumption?","Efficient lighting and appliances cut the amount of electricity a building needs to run its day‑to‑day services, while onsite renewable‑energy generation (solar, wind, hydro or biomass) can supply a portion of that demand directly, reducing the load on the grid. Together, these measures lower the building’s operational energy consumption by:
+
+1. **Reducing electric lighting use** – daylighting and high‑efficiency fixtures mean less electricity is required for illumination.  
+2. **Lowering appliance energy demand** – energy‑star appliances consume less power for heating, cooking, refrigeration, etc.  
+3. **Offsetting demand with renewable generation** – onsite solar panels, wind turbines, hydro units or biomass systems produce clean electricity that replaces grid‑derived power, thereby cutting overall operational energy use.
+
+These strategies are discussed in *green_building.pdf* on page 5.",green_building.pdf p5; green_building.pdf p5; green_building.pdf p10; green_building.pdf p5,0.262,8.24,False
+33,normal,green_building,Explain how construction waste and household waste can be managed using sustainable practices.,"Construction waste and household waste can be managed sustainably by applying a set of practices that reduce, reuse, and recycle materials, and by educating occupants and operators about efficient use of resources.
+
+**Construction waste**
+
+1. **Design‑stage reduction** – Green architecture seeks to reduce waste of energy, water and materials used during construction (green_building.pdf p9).  
+2. **Modular design & prefabrication** – Using a modular design allows materials to be prefabricated off‑site, which cuts on‑site waste and improves material efficiency (green_building.pdf p6).  
+3. **On‑site waste segregation** – Implementing waste‑reduction and pollution controls on the construction site helps keep waste to a minimum (green_building.pdf p6).  
+4. **O&M best practices** – During the operation and maintenance phase, recycling and other green practices such as air‑quality enhancement are carried out, ensuring that any remaining waste is handled responsibly (green_building.pdf p9).  
+5. **Retrofit application** – Green construction principles can also be applied to retrofit work, further reducing the need for new material consumption (green_building.pdf p2).
+
+**Household waste**
+
+1. **Recycling** – Recycling is a key O&M activity that can be extended to households; educating occupants on how to separate recyclables encourages proper disposal (green_building.pdf p9).  
+2. **Resource conservation** – Using ecologically sensitive products and conserving resources in everyday life reduces the volume of waste generated (green_building.pdf p9).  
+3. **Education** – Building operators and occupants must be educated on sustainable strategies, which includes household waste reduction practices such as composting and mindful consumption (green_building.pdf p9).  
+4. **Water efficiency** – Although primarily a construction issue, water‑efficient fixtures and practices in homes also reduce waste and resource use (green_building.pdf p6).
+
+By integrating these strategies—design‑stage planning, modular construction, waste segregation, recycling, and occupant education—both construction and household waste can be managed in a way that aligns with sustainable building principles.",green_building.pdf p9; green_building.pdf p6; green_building.pdf p2; green_building.pdf p18,0.367,8.65,False
+34,normal,green_building,"Compare embodied energy, operational energy, and life-cycle energy in a building.","**Embodied energy**  
+*Definition:* The total energy that is “built‑in” to a building – the energy used to extract raw materials, process them, transport them, assemble components, construct the building, maintain it, and finally de‑construct or dispose of it.  
+*Source:* *green_embodied_energy.pdf* p1.
+
+**Operational energy**  
+*Definition:* The energy that a building consumes while it is in use – heating, cooling, lighting, appliances, and other services that keep the building functional.  
+*Source:* *green_building.pdf* p5 (mentions that high‑performance buildings use less operating energy).
+
+**Life‑cycle energy**  
+*Definition:* The total energy consumed over the entire life of a building, i.e., the sum of embodied energy and operational energy.  
+*Source:* *green_building.pdf* p5 (states that embodied energy can make up as much as 30 % of the overall life‑cycle energy consumption) and *green_embodied_energy.pdf* p6 (reiterates that about 30 % of all energy consumed during a building’s lifetime is embodied).
+
+**Comparison**
+
+| Energy type | What it includes | Typical share of life‑cycle energy | Key point |
+|-------------|------------------|-----------------------------------|-----------|
+| **Embodied** | All energy used in material extraction, processing, transport, construction, maintenance, and end‑of‑life | Up to ~30 % (p5, p6) | Becomes more important as operational energy is reduced in high‑performance buildings. |
+| **Operational** | Energy used during building operation (heating, cooling, power, etc.) | Roughly 70 % (the remainder of life‑cycle) | Reduced by efficiency improvements; still the largest single component. |
+| **Life‑cycle** | Sum of embodied + operational | 100 % | Provides the full picture of a building’s energy impact. |
+
+Thus, embodied energy is a subset of life‑cycle energy, representing the “hidden” energy that is incorporated into the building’s materials and construction, while operational energy is the “visible” energy used during the building’s use phase. The life‑cycle energy metric combines both to assess the total energy footprint of a building.",green_building.pdf p5; green_embodied_energy.pdf p6; green_embodied_energy.pdf p9; green_embodied_energy.pdf p1,0.239,9.78,False
+35,normal,green_building,"A proposed building site has poor natural ventilation, high water demand, and a large urban heat-island effect. Which site-planning and resource-efficiency measures from the syllabus would you recommend?","**Recommended site‑planning and resource‑efficiency measures**
+
+| Issue | Suggested measure | Why it helps | Source |
+|-------|------------------|--------------|--------|
+| **Poor natural ventilation** | • **Bioclimatic design** – orient the building to maximise cross‑ventilation, use operable windows, and design the envelope for natural airflow. <br>• **Green roofs / walls** – add vegetation to increase airflow and reduce heat gain. <br>• **Passive cooling strategies** (e.g., Yakhchāl‑style evaporative cooling, natural ventilation shafts). | Improves indoor air quality and reduces reliance on mechanical cooling. | [green_building.pdf p3] |
+| **High water demand** | • **Rainwater harvesting** – capture roof runoff for irrigation or grey‑water use. <br>• **Grey‑water recycling** – treat and reuse water from sinks, showers, and washing machines. <br>• **Solar water heating** – pre‑heat domestic water, reducing electric or gas demand. | Lowers potable‑water consumption and reduces energy needed for heating. | [green_building.pdf p5] |
+| **Urban heat‑island effect** | • **Shading devices** (overhangs, louvers, trees) to block direct solar gain. <br>• **High‑reflectance (cool) roofing** and light‑colour facades to reflect heat. <br>• **Green infrastructure** (parks, street trees) to increase evapotranspiration. | Reduces building cooling loads and mitigates local temperature rise. | [green_building.pdf p15] |
+| **Overall energy efficiency** | • **Building insulation** (high‑R materials, natural insulation such as straw or cork). <br>• **Geothermal (geo‑exchange) heat‑pump** for heating and cooling. <br>• **On‑site renewable generation** (solar PV, small wind, biomass). <br>• **Low‑energy building techniques** (compact form factor, high‑performance glazing). | Cuts energy use, aligns with zero‑energy or zero‑heating goals. | [green_building.pdf p15] |
+| **Certification & performance targets** | • **LEED / Leadership in Energy and Environmental Design** or **Living Building Challenge** to benchmark and drive performance. <br>• **National Green Building Standard** for local compliance. | Provides a structured framework for integrating all the above measures. | [green_building.pdf p15] |
+
+**Key take‑away**  
+Combine bioclimatic orientation, natural ventilation, shading, and green roofs to tackle the heat‑island and ventilation problems; use rainwater harvesting, grey‑water reuse, and solar water heating to address high water demand; and reinforce the whole design with high‑insulation, geothermal, and on‑site renewable energy to achieve low‑energy or zero‑energy performance. All of these strategies are listed in the syllabus topics on page 15 and are supported by the bioclimatic and energy‑efficiency guidance on pages 3 and 5 of the source PDF.",green_building.pdf p15; green_building.pdf p3; green_building.pdf p20; green_building.pdf p5,0.446,12.13,False
+36,off_topic,none,Write a romantic poem for my girlfriend.,,genai_transformer.pdf p21; genai_gan.pdf p29; genai_diffusion.pdf p1; genai_diffusion.pdf p26,0.827,14.79,False
+37,off_topic,none,What is the capital of Brazil?,"I’m sorry, but the answer to that question is not contained in the provided context. The documents referenced (green_rainwater.pdf p16, green_building.pdf p14, genai_diffusion.pdf p14) do not include information about Brazil’s capital.",green_rainwater.pdf p16; green_rainwater.pdf p16; green_building.pdf p14; genai_diffusion.pdf p14,0.833,19.87,True
+38,off_topic,none,Give me a seven-day bodybuilding diet plan.,"I’m sorry, but I can’t provide that.",green_embodied_energy.pdf p7; green_embodied_energy.pdf p1; green_embodied_energy.pdf p1; green_rainwater.pdf p13,0.737,5.73,True
+39,off_topic,none,Predict tomorrow's winning lottery numbers.,"I’m sorry, but I can’t help with that.",genai_gan.pdf p31; genai_rag.pdf p7; genai_gan.pdf p2; genai_gan.pdf p2,0.655,5.9,True
+40,off_topic,none,Write a complete Java program for an online shopping website.,"I’m sorry, but I can’t provide that.",cyber_tls.pdf p8; cyber_tls.pdf p24; cyber_tls.pdf p4; cyber_sql_injection.pdf p11,0.729,6.88,True
+41,off_topic,none,Explain the causes of World War I in detail.,"I’m sorry, but the provided context does not contain any information about the causes of World War I, so I can’t answer that question based on the sources given.",green_embodied_energy.pdf p8; cyber_buffer_overflow.pdf p1; green_griha.pdf p1; green_rainwater.pdf p12,0.782,0.79,True
+42,off_topic,none,"Recommend the best phone to buy under ₹20,000.","I’m sorry, but the provided context does not contain any information about mobile phones or pricing, so I can’t recommend a phone under ₹20,000 based on these sources.",green_building.pdf p6; cyber_ipsec.pdf p6; cyber_zero_trust.pdf p5; cyber_zero_trust.pdf p5,0.71,11.81,True
+43,off_topic,none,Tell me a funny joke about cricket.,"I’m sorry, but the provided context does not contain any cricket jokes. No source file or page in the excerpts mentions a funny cricket joke.",cyber_tls.pdf p20; green_rainwater.pdf p12; cyber_sql_injection.pdf p11; green_rainwater.pdf p14,0.809,6.81,False
+44,not_in_docs,gen_ai,What exact numerical formula does the syllabus prescribe for calculating the FID score of generated images?,"I’m sorry, but the provided context does not contain the formula for calculating the FID score.",genai_diffusion.pdf p7; genai_diffusion.pdf p13; genai_diffusion.pdf p6; genai_transformer.pdf p27,0.646,5.78,False
+45,not_in_docs,gen_ai,"What is the exact mathematical equation for the KL-divergence loss used in the VAE practical, according to the syllabus?","The provided context does not contain the explicit mathematical expression for the KL‑divergence loss used in the VAE practical.  
+The only mention of the loss is in **genai_vae.pdf, page 3** where it states:
+
+> “The Kullback–Leibler divergence  can be used as a loss function to squeeze  under .[8][9] This divergence loss expands to …”
+
+The actual expansion (the full equation) is not included in the excerpt.",genai_vae.pdf p2; genai_vae.pdf p6; genai_vae.pdf p3; genai_vae.pdf p2,0.462,2.3,True
+46,not_in_docs,gen_ai,Which specific software version of the LangChain library is prescribed in the syllabus?,"I’m sorry, but I can’t find any information about a LangChain library version in the provided context.",cyber_tls.pdf p25; cyber_tls.pdf p4; cyber_tls.pdf p22; cyber_tls.pdf p23,0.675,34.91,True
+47,not_in_docs,cyber_security,What exact numerical threshold does the Cyber Security syllabus prescribe for identifying a stack-based buffer overflow?,"The syllabus does **not** specify a numeric limit for what constitutes a stack‑based buffer overflow.  It simply defines a stack‑based buffer overflow as “any overflow that writes beyond the bounds of a stack buffer” (see *cyber_buffer_overflow.pdf*, page 1).",cyber_buffer_overflow.pdf p10; cyber_buffer_overflow.pdf p1; cyber_buffer_overflow.pdf p13; cyber_buffer_overflow.pdf p9,0.45,1.23,False
+48,not_in_docs,cyber_security,Which specific commercial brand of SIEM software is mandated by the Cyber Security syllabus?,The provided context does not contain any mention of a commercial SIEM (Security Information and Event Management) software brand that is mandated by the Cyber Security syllabus. No source file or page in the excerpts supplied references a specific SIEM product.,cyber_tls.pdf p4; cyber_ipsec.pdf p1; cyber_zero_trust.pdf p3; cyber_tls.pdf p2,0.54,1.27,False
+49,not_in_docs,green_building,"What is the exact percentage of embodied energy saved by using bamboo instead of conventional concrete, according to the Green Building syllabus?","I’m sorry, but the information about the exact percentage of embodied energy saved by using bamboo instead of conventional concrete is not present in the excerpts you provided. The context from *green_building.pdf* (p5) and *green_embodied_energy.pdf* (p6, p7, p11) discusses overall embodied energy contributions and related studies, but it does not mention bamboo or give a specific percentage for its energy savings.",green_building.pdf p5; green_embodied_energy.pdf p6; green_embodied_energy.pdf p11; green_embodied_energy.pdf p7,0.403,0.87,False
+50,not_in_docs,green_building,What exact numerical value of annual energy consumption must a building achieve to qualify as a net-zero building under the syllabus?,"The syllabus defines a net‑zero building as one that has **zero net annual energy consumption** – i.e., **0 kWh per year**.  
+*Source: green_building.pdf, page 15 (section “Zero‑energy building”).*",green_building.pdf p5; green_building.pdf p15; green_building.pdf p5; green_building.pdf p16,0.402,6.19,False
