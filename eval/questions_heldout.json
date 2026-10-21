@@ -1,0 +1,17 @@
+[
+  {"id": 101, "subject": "cyber_security", "difficulty": "easy", "type": "normal", "question": "What are the two modes of operation in IPsec?", "correct_answer": "", "source_file": "", "page": null},
+    {"id": 102, "subject": "cyber_security", "difficulty": "medium", "type": "normal", "question": "What is address space layout randomization (ASLR), and how does it make buffer overflow attacks harder?", "correct_answer": "", "source_file": "", "page": null},
+  {"id": 103, "subject": "gen_ai", "difficulty": "easy", "type": "normal", "question": "Who introduced generative adversarial networks, and in which year?", "correct_answer": "", "source_file": "", "page": null},
+  {"id": 104, "subject": "gen_ai", "difficulty": "medium", "type": "normal", "question": "What is the reparameterization trick in a variational autoencoder?", "correct_answer": "", "source_file": "", "page": null},
+  {"id": 105, "subject": "green_building", "difficulty": "easy", "type": "normal", "question": "What are the certification levels in the LEED rating system?", "correct_answer": "", "source_file": "", "page": null},
+  {"id": 106, "subject": "none", "difficulty": "n/a", "type": "off_topic", "question": "Give me a recipe for chicken biryani.", "correct_answer": "REFUSE", "source_file": "", "page": null},
+  {"id": 107, "subject": "none", "difficulty": "n/a", "type": "off_topic", "question": "Who won the last IPL match?", "correct_answer": "REFUSE", "source_file": "", "page": null},
+  {"id": 108, "subject": "none", "difficulty": "n/a", "type": "off_topic", "question": "Which laptop is best for gaming under 80000 rupees?", "correct_answer": "REFUSE", "source_file": "", "page": null},
+  {"id": 109, "subject": "none", "difficulty": "n/a", "type": "off_topic", "question": "Help me write a cover letter for a marketing job.", "correct_answer": "REFUSE", "source_file": "", "page": null},
+  {"id": 110, "subject": "none", "difficulty": "n/a", "type": "off_topic", "question": "Explain database normalization with an example.", "correct_answer": "REFUSE", "source_file": "", "page": null},
+  {"id": 111, "subject": "gen_ai", "difficulty": "n/a", "type": "not_in_docs", "question": "Is there a lab manual for the Deep Learning lab in 7th semester?", "correct_answer": "REFUSE", "source_file": "", "page": null},
+  {"id": 112, "subject": "cyber_security", "difficulty": "n/a", "type": "not_in_docs", "question": "What is the email address of the Cyber Security professor?", "correct_answer": "REFUSE", "source_file": "", "page": null},
+  {"id": 113, "subject": "none", "difficulty": "n/a", "type": "not_in_docs", "question": "When are the 7th semester practical exams scheduled?", "correct_answer": "REFUSE", "source_file": "", "page": null},
+  {"id": 114, "subject": "none", "difficulty": "n/a", "type": "not_in_docs", "question": "What is the syllabus for Unit 3 of Software Testing Methodologies?", "correct_answer": "REFUSE", "source_file": "", "page": null},
+  {"id": 115, "subject": "cyber_security", "difficulty": "n/a", "type": "not_in_docs", "question": "How many credits is the Cyber Security elective worth?", "correct_answer": "REFUSE", "source_file": "", "page": null}
+]
