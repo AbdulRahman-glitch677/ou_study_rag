@@ -2,19 +2,25 @@ import json, time, csv, sys, os
 sys.path.insert(0, "src")
 
 mode = sys.argv[1] if len(sys.argv) > 1 else "baseline"
+qfile = sys.argv[2] if len(sys.argv) > 2 else "questions"
+
 if mode == "guarded":
     from guarded import guarded_answer as answer
 else:
     from rag import answer
 
-OUT = f"eval/results_{mode}.csv"
+if qfile == "questions":
+    OUT = f"eval/results_{mode}.csv"
+else:
+    OUT = f"eval/results_{mode}_{qfile}.csv"
+
 FIELDS = ["id", "type", "subject", "question", "answer", "sources",
           "top_distance", "latency_s", "looks_like_refusal", "error"]
 REFUSAL_WORDS = ["not found", "not in", "cannot", "can't", "can’t",
                  "don't have", "do not have", "only answer", "outside",
                  "not covered", "no information", "unable", "blocked"]
 
-with open("eval/questions.json", encoding="utf-8") as f:
+with open(f"eval/{qfile}.json", encoding="utf-8") as f:
     questions = json.load(f)
 
 done = {}

@@ -222,3 +222,4 @@ __marimo__/
 venv/
 chroma_db/
 data/
+.vscode/

@@ -5,6 +5,7 @@ import chromadb
 from sentence_transformers import SentenceTransformer
 
 load_dotenv()
+MODEL = os.getenv("LLM_MODEL", "openai/gpt-oss-20b")
 llm = Groq(api_key=os.getenv("GROQ_API_KEY"))
 model = SentenceTransformer("all-MiniLM-L6-v2")
 collection = chromadb.PersistentClient(path="chroma_db").get_collection("study_docs")
@@ -27,7 +28,8 @@ Context:
 
 Question: {question}"""
     resp = llm.chat.completions.create(
-        model="openai/gpt-oss-20b",
+        model="MODEL",
+        reasoning_effort="low",
         messages=[{"role": "user", "content": prompt}],
         temperature=0,
     )
